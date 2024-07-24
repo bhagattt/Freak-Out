@@ -30,10 +30,12 @@ app.use((error, req, res, next) => {
   res.status(500).render('500');
 });
 
+const port = process.env.PORT || 4000; // Use environment variable for port
+
 db.connectToDatabase()
   .then(() => {
     console.log('Connected to database');
-    app.listen(4000, () => console.log('Server running on port 4000'));
+    app.listen(port, () => console.log(`Server running on port ${port}`));
   })
   .catch((error) => {
     console.error('Failed to connect to the database', error);
