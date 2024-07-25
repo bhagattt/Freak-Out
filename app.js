@@ -16,9 +16,7 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true }));
 
-
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(blogRoutes);
 
@@ -33,11 +31,5 @@ app.use((error, req, res, next) => {
 
 const port = process.env.PORT || 4000; 
 
-db.connectToDatabase()
-  .then(() => {
-    console.log('Connected to database');
-    app.listen(port, () => console.log(`Server running on port ${port}`));
-  })
-  .catch((error) => {
-    console.error('Failed to connect to the database', error);
-  });
+
+module.exports = app;
