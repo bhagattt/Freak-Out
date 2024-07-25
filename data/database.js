@@ -1,19 +1,19 @@
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+require('dotenv').config();
+const { MongoClient } = require('mongodb');
 
 let database;
 
 async function connect() {
+  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/blogs'; 
   try {
-    const client = await MongoClient.connect('mongodb://127.0.0.1:27017', {
-      useNewUrlParser: true,
+    const client = await MongoClient.connect(uri, {
       useUnifiedTopology: true
     });
-    database = client.db('blogs');
+    database = client.db(); 
     console.log('Database connection established');
   } catch (error) {
     console.error('Failed to connect to the database', error);
-    throw error; // Propagate the error so it can be handled upstream
+    throw error; 
   }
 }
 

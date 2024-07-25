@@ -1,3 +1,4 @@
+require('dotenv').config(); 
 const path = require('path');
 const express = require('express');
 const blogRoutes = require('./routes/blog');
@@ -15,10 +16,10 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from the "public" directory
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use blog routes
+
 app.use(blogRoutes);
 
 app.use((req, res) => {
@@ -30,7 +31,7 @@ app.use((error, req, res, next) => {
   res.status(500).render('500');
 });
 
-const port = process.env.PORT || 4000; // Use environment variable for port
+const port = process.env.PORT || 4000; 
 
 db.connectToDatabase()
   .then(() => {
